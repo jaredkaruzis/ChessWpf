@@ -31,14 +31,14 @@ public class BoardViewModel : BindableBase, IBoardViewModel {
     private List<SquareButton> _highlightedSquares = new List<SquareButton>();
 
     public BoardViewModel(IBoardModel boardModel) {
-        _boardModelManager = new BoardModel();
+        _boardModelManager = boardModel;
         _boardModelManager.RefreshBoardEventHandler += OnRefreshBoard;
         _boardModelManager.GameOverEventHandler += OnGameOver;
 
         Squares = CollectionViewSource.GetDefaultView(SquareButtons);
         Commands.ResetGame = new DelegateCommand(ResetGame);
 
-        _boardModelManager.StartNewGame(ChessEngine.Color.White);
+        _boardModelManager.StartNewGame();
     }
 
     public void Refresh(List<Square> inSquares) {

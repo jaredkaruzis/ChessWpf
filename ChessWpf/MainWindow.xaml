@@ -8,18 +8,7 @@
         Title="ChessSharp" Height="610" Width="580">
 
     <Grid>
-        
-        <DockPanel>
-            <Menu DockPanel.Dock="Top">
-                <MenuItem Header="_File">
-					<MenuItem Header="_New Game"/>
-					<MenuItem Header="_Import"/>
-                    <MenuItem Header="_Export"/>
-                </MenuItem>
-            </Menu>
-            <StackPanel></StackPanel>
-        </DockPanel>
-        
+        <local:MenuView/>
         <local:BoardView/>
     </Grid>
     

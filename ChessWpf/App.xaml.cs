@@ -1,5 +1,5 @@
 ﻿using ChessWpf.ViewModels;
-using Prism.Unity;
+using Prism.Mvvm;
 using System.Windows;
 using Unity;
 
@@ -15,8 +15,15 @@ public partial class App {
 
         container.RegisterSingleton<IBoardModel, BoardModel>();
 
-        container.RegisterType<IBoardViewModel, BoardViewModel>();
+        container.RegisterType<IBoardViewModel, BoardViewModel>();  
+        container.RegisterType<IMenuViewModel, MenuViewModel>();
         container.RegisterType<IMainWindow, MainWindow>();
+
+        ViewModelLocationProvider.SetDefaultViewModelFactory((IMenuViewModel) =>
+        {
+            return container.Resolve(IMenuViewModel);
+        });
+
 
         var mainWindow = container.Resolve<MainWindow>(); // Creating Main window
         mainWindow.Show();
