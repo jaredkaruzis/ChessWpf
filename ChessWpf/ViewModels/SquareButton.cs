@@ -18,14 +18,20 @@ public class SquareButton : BindableBase {
     public Square Square;   // TODO REMOVE BOARD REFERENCE
     private Piece _piece;   // TODO REMOVE BOARD REFERENCE
 
+    private SolidColorBrush RedBrush = new SolidColorBrush(Colors.Red);
+    private SolidColorBrush LightGrayBrush = new SolidColorBrush(Colors.LightGray);
+    private SolidColorBrush DarkGrayBrush = new SolidColorBrush(Colors.DarkGray);
+    private SolidColorBrush YellowBrush  = new SolidColorBrush(Colors.Yellow);
+
+    private SolidColorBrush BackgroundBrush;
+
     public Piece Piece {
         get => _piece;
         set {
             SetProperty(ref _piece, value);
             if (value != null) {
                 ImagePath = Piece.Color == ChessEngine.Color.White ? whitePieceImages[Piece.Type] : blackPieceImages[Piece.Type];
-            }
-            else {
+            } else {
                 ImagePath = "Images/empty.png";
             }
         }
@@ -33,10 +39,9 @@ public class SquareButton : BindableBase {
 
     private SolidColorBrush GetBackground() {
         if (Square.X % 2 == 0) {
-            return Square.Y % 2 == 0 ? new SolidColorBrush(Colors.LightGray) : new SolidColorBrush(Colors.DarkGray);
-        }
-        else {
-            return Square.Y % 2 == 1 ? new SolidColorBrush(Colors.LightGray) : new SolidColorBrush(Colors.DarkGray);
+            return Square.Y % 2 == 0 ? LightGrayBrush : DarkGrayBrush;
+        } else {
+            return Square.Y % 2 == 1 ? LightGrayBrush : DarkGrayBrush;
         }
     }
 
@@ -50,7 +55,7 @@ public class SquareButton : BindableBase {
     public bool Selected {
         get => _selected;
         set {
-            ButtonColor = value ? new SolidColorBrush(Colors.Red) : GetBackground();
+            ButtonColor = value ? RedBrush : BackgroundBrush;
             SetProperty(ref _selected, value);
         }
     }
@@ -59,7 +64,7 @@ public class SquareButton : BindableBase {
     public bool Highlighted {
         get => _highlighted;
         set {
-            ButtonColor = value ? new SolidColorBrush(Colors.Yellow) : GetBackground();
+            ButtonColor = value ? YellowBrush : BackgroundBrush;
             SetProperty(ref _highlighted, value);
         }
     }
@@ -72,7 +77,8 @@ public class SquareButton : BindableBase {
 
     public SquareButton(Square s) {
         Square = s;
-        ButtonColor = GetBackground();
+        BackgroundBrush = GetBackground();
+        ButtonColor = BackgroundBrush;
         Commands.SelectSquare = new DelegateCommand(Select);
         Piece = s.Piece;
     }
