@@ -1,13 +1,15 @@
 ﻿using ChessEngine;
 using Prism.Commands;
 using Prism.Mvvm;
+using System;
 using System.ComponentModel;
 using System.Dynamic;
 
 namespace ChessWpf; 
 public class NewGameViewModel : BindableBase, INotifyPropertyChanged, INewGameViewModel {
 
-    public IBoardModel _boardModelManager;
+    private IBoardModel _boardModelManager;
+    private INewGameManager _newGameManager;
 
     private bool _isStartingNewGame;
     public bool IsStartingNewGame {
@@ -32,19 +34,21 @@ public class NewGameViewModel : BindableBase, INotifyPropertyChanged, INewGameVi
     public int AiLevel { get; set; }
     public dynamic Commands { get; } = new ExpandoObject();
 
-    public NewGameViewModel(IBoardModel boardModel) {
-        _boardModelManager= boardModel;
+    public NewGameViewModel(IBoardModel boardModel, INewGameManager newGameManager) {
+        _boardModelManager = boardModel;
+        _newGameManager = newGameManager;
+
+        _newGameManager.OpenNewGameMenuEvent += Awake;
 
         Commands.StartNewGame = new DelegateCommand(StartNewGame);
         Commands.SelectWhite = new DelegateCommand(SelectWhite);
         Commands.SelectBlack = new DelegateCommand(SelectBlack);
-        Commands.Awake = new DelegateCommand(Awake);
 
-        IsStartingNewGame = true;
+        IsStartingNewGame = false;
     }
 
-    public void Awake() {
-        IsStartingNewGame = false;
+    public void Awake(object sender, EventArgs e) {
+        IsStartingNewGame = true;
     }
 
     public void StartNewGame() {

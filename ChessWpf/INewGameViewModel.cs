@@ -14,5 +14,4 @@ public interface INewGameViewModel {
     public void StartNewGame();
     public void SelectWhite();
     public void SelectBlack();
-    public void Awake();
 }

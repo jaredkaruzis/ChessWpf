@@ -59,7 +59,7 @@ public class BoardViewModel : BindableBase, IBoardViewModel {
         Console.WriteLine("Probably Not");
     }
 
-    public void OnSquareSelected(object sender, HightlightArgs e) {
+    public void OnSquareSelected(object sender, HighlightSquaresArgs e) {
         
         // This is the first click, starting off fresh. No need to reset anything
         if (_originSquare == null) {
@@ -155,14 +155,5 @@ public class BoardViewModel : BindableBase, IBoardViewModel {
 
     public void ResetGame() {
         _boardModelManager.StartNewGame(Color.White);
-    }
-}
-
-public class HightlightArgs : EventArgs {
-    public SquareButton clicked;
-    public List<int[]> squares;
-    public HightlightArgs (SquareButton o, List<int[]> s) {
-        clicked = o;
-        squares = s;
     }
 }

@@ -14,7 +14,7 @@ public class SquareButton : BindableBase {
 
     public dynamic Commands { get; } = new ExpandoObject();
 
-    public event EventHandler<HightlightArgs> HighlightSquares;
+    public event EventHandler<HighlightSquaresArgs> HighlightSquares;
 
     public Square Square;   // TODO REMOVE BOARD REFERENCE
     private Piece _piece;   // TODO REMOVE BOARD REFERENCE
@@ -87,7 +87,7 @@ public class SquareButton : BindableBase {
         }
 
         Application.Current.Dispatcher.Invoke(new Action(() => {
-            HighlightSquares?.Invoke(this, new HightlightArgs(this, moves));
+            HighlightSquares?.Invoke(this, new HighlightSquaresArgs(this, moves));
         }));
     }
 

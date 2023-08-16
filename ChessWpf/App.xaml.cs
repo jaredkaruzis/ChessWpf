@@ -14,8 +14,9 @@ public partial class App {
         IUnityContainer container = new UnityContainer();
 
         container.RegisterSingleton<IBoardModel, BoardModel>();
+        container.RegisterSingleton<INewGameManager, NewGameManager>();
 
-        container.RegisterType<IBoardViewModel, BoardViewModel>();  
+        container.RegisterType<IBoardViewModel, BoardViewModel>();
         container.RegisterType<IMenuViewModel, MenuViewModel>();
         container.RegisterType<INewGameViewModel, NewGameViewModel>();
 
@@ -23,6 +24,7 @@ public partial class App {
 
         ViewModelLocationProvider.SetDefaultViewModelFactory((IMenuViewModel) => container.Resolve(IMenuViewModel));
         ViewModelLocationProvider.SetDefaultViewModelFactory((INewGameViewModel) => container.Resolve(INewGameViewModel));
+        ViewModelLocationProvider.SetDefaultViewModelFactory((INewBoardViewModel) => container.Resolve(INewBoardViewModel));
 
         var mainWindow = container.Resolve<MainWindow>(); // Creating Main window
         mainWindow.Show();
