@@ -1,9 +1,9 @@
 ﻿using ChessEngine;
-using Prism.Commands;
-using Prism.Mvvm;
 using System;
-using System.ComponentModel;
 using System.Dynamic;
+using System.ComponentModel;
+using Prism.Mvvm;
+using Prism.Commands;
 
 namespace ChessWpf;
 

@@ -1,12 +1,12 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
+﻿using ChessEngine;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Dynamic;
 using System.Linq;
+using System.Dynamic;
 using System.Windows.Data;
-using ChessEngine;
+using System.ComponentModel;
+using System.Collections.Generic;
+using Prism.Mvvm;
+using Prism.Commands;
 
 namespace ChessWpf; 
 

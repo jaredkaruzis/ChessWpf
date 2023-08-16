@@ -1,6 +1,6 @@
-﻿using Prism.Commands;
+﻿using System.Dynamic;
 using Prism.Mvvm;
-using System.Dynamic;
+using Prism.Commands;
 
 namespace ChessWpf;
 

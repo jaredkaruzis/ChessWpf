@@ -1,11 +1,11 @@
 ﻿using ChessEngine;
-using Prism.Commands;
-using Prism.Mvvm;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Windows.Media;
 using System;
+using System.Dynamic;
 using System.Windows;
+using System.Windows.Media;
+using System.Collections.Generic;
+using Prism.Mvvm;
+using Prism.Commands;
 
 namespace ChessWpf;
 

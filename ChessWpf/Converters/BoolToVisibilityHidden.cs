@@ -1,7 +1,7 @@
-﻿using System.Globalization;
-using System.Windows.Data;
-using System;
+﻿using System;
 using System.Windows;
+using System.Windows.Data;
+using System.Globalization;
 
 namespace ChessWpf;
 
