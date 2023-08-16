@@ -1,2 +1,2 @@
 ﻿namespace ChessWpf;
-public interface IBoardViewModel{}
+public interface IBoardViewModel { }

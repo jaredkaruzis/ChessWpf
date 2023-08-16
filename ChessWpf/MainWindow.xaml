@@ -10,9 +10,7 @@
     <Grid>
         <local:MenuView/>
         <local:BoardView/>
+        <local:NewGameView/>
     </Grid>
     
-    <Window.InputBindings>
-        <KeyBinding Key="Space" Command="{Binding Commands.ResetGame}" />
-    </Window.InputBindings>
 </Window>

@@ -2,6 +2,7 @@
 using ChessWpf.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace ChessWpf; 
@@ -13,7 +14,7 @@ public class BoardModel : IBoardModel {
     public string WhitePlayerName { get; set; }
     public string BlackPlayerName { get; set; }
 
-    public AI.LogicType OpponentLogic { get; set; }
+    public int OpponenetLevel { get; set; }     // level 1 = easy, level 2 = medium, level 3 = hard
 
     public Color OpponentColor { get; set; }
 
@@ -24,7 +25,23 @@ public class BoardModel : IBoardModel {
 
     public void StartNewGame(Color PlayerColor = Color.White) {
         OpponentColor = PlayerColor == Color.Black ? Color.White : Color.Black;
-        OpponentLogic = AI.LogicType.Minmax;
+        OpponenetLevel = 2;
+        WhitePlayerName = "Player";
+        CurrentGame = new Board();
+        Refresh();
+    }
+
+    public void StartNewGame(Color PlayerColor, int AiLevel, string playerName) {
+        OpponentColor = PlayerColor == Color.Black ? Color.White : Color.Black;
+        OpponenetLevel = AiLevel;
+        if (PlayerColor == Color.White) {
+            WhitePlayerName = playerName;
+            BlackPlayerName = "AI";
+        }
+        else {
+            WhitePlayerName = "AI";
+            BlackPlayerName = playerName;
+        }
         CurrentGame = new Board();
         Refresh();
     }
@@ -60,29 +77,26 @@ public class BoardModel : IBoardModel {
             Application.Current.Dispatcher.Invoke(new Action(() => GameOverEventHandler(this, e)));
         } 
         else if (CurrentGame.CurrentTurn == OpponentColor) {
-            //var task = new Task(MoveAI);
-            //task.Start();
+            var task = new Task(MoveAI);
+            task.Start();
         }
     }
 
     private void MoveAI() {
-        switch (OpponentLogic) {
-            case AI.LogicType.Minmax:
-                var move = AI.MinmaxMove(CurrentGame);
-                SubmitMove(move[0], move[1]);
-                break;
-            default:
-                move = AI.RandomMove(CurrentGame);
-                SubmitMove(move[0], move[1]);
-                break;
-        }
+        var move = AI.MinmaxMove(CurrentGame, OpponenetLevel);
+        SubmitMove(move[0], move[1]);
     }
 
     private List<Square> FlattenSquares() {
         var squares = new List<Square>();
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                squares.Add(CurrentGame.Squares[j, i]);
+                if (OpponentColor == Color.Black) {
+                    squares.Add(CurrentGame.Squares[j, i]);
+                }
+                else if (OpponentColor == Color.White) {
+                    squares.Add(CurrentGame.Squares[7 - j, 7 - i]);
+                }
             }
         }
         return squares;

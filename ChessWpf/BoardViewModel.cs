@@ -154,7 +154,7 @@ public class BoardViewModel : BindableBase, IBoardViewModel {
     }
 
     public void ResetGame() {
-        _boardModelManager.StartNewGame(ChessEngine.Color.White);
+        _boardModelManager.StartNewGame(Color.White);
     }
 }
 

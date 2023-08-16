@@ -4,8 +4,8 @@ using System.Dynamic;
 
 namespace ChessWpf;
 
-public class MenuViewModel : BindableBase, IMenuViewModel
-{
+public class MenuViewModel : BindableBase, IMenuViewModel {
+
     private IBoardModel _boardModelManager;
 
     public dynamic Commands { get; } = new ExpandoObject();
@@ -16,6 +16,6 @@ public class MenuViewModel : BindableBase, IMenuViewModel
     }
 
     public void StartNewGame() {
-        _boardModelManager.StartNewGame(ChessEngine.Color.White);
+        _boardModelManager.StartNewGame();
     }
 }

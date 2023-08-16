@@ -17,13 +17,12 @@ public partial class App {
 
         container.RegisterType<IBoardViewModel, BoardViewModel>();  
         container.RegisterType<IMenuViewModel, MenuViewModel>();
+        container.RegisterType<INewGameViewModel, NewGameViewModel>();
+
         container.RegisterType<IMainWindow, MainWindow>();
 
-        ViewModelLocationProvider.SetDefaultViewModelFactory((IMenuViewModel) =>
-        {
-            return container.Resolve(IMenuViewModel);
-        });
-
+        ViewModelLocationProvider.SetDefaultViewModelFactory((IMenuViewModel) => container.Resolve(IMenuViewModel));
+        ViewModelLocationProvider.SetDefaultViewModelFactory((INewGameViewModel) => container.Resolve(INewGameViewModel));
 
         var mainWindow = container.Resolve<MainWindow>(); // Creating Main window
         mainWindow.Show();
