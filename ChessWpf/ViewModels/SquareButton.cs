@@ -1,5 +1,4 @@
 ﻿using ChessEngine;
-using ChessWpf.ViewModels;
 using Prism.Commands;
 using Prism.Mvvm;
 using System.Collections.Generic;

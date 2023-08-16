@@ -1,6 +1,7 @@
 ﻿using ChessEngine;
 
 namespace ChessWpf; 
+
 public interface INewGameViewModel {
 
     public bool IsStartingNewGame { get; set; }

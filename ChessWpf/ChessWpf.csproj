@@ -123,7 +123,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModels\Interfaces\" />
     <Folder Include="Views\Interfaces\" />
   </ItemGroup>
   <ItemGroup>

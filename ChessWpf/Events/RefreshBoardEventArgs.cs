@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ChessWpf.ViewModels;
+namespace ChessWpf;
 
 public class RefreshBoardEventArgs : EventArgs {
     public List<Square> Squares { get; set; }

@@ -1,7 +1,7 @@
 ﻿using ChessEngine;
-using ChessWpf.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -21,7 +21,7 @@ public class BoardModel : IBoardModel {
     public EventHandler<RefreshBoardEventArgs> RefreshBoardEventHandler { get; set; }
     public EventHandler<GameOverEventArgs> GameOverEventHandler { get; set; }
 
-    public BoardModel() {}
+    public BoardModel() { }
 
     public void StartNewGame(Color PlayerColor = Color.White) {
         OpponentColor = PlayerColor == Color.Black ? Color.White : Color.Black;
@@ -64,22 +64,30 @@ public class BoardModel : IBoardModel {
     }
 
     private void Refresh() {
+        RefreshBoard();
+
+        if (CurrentGame.GameOver) {
+            NotifyGameOver();
+        } 
+        else if (CurrentGame.CurrentTurn == OpponentColor) {
+            var aiTask = new Task(MoveAI);
+            aiTask.Start();
+        }
+    }
+
+    private void RefreshBoard() {
         var args = new RefreshBoardEventArgs() {
             Squares = FlattenSquares(),
         };
         Application.Current.Dispatcher.Invoke(new Action(() => RefreshBoardEventHandler(this, args)));
+    }
 
-        if (CurrentGame.GameOver) {
-            var e = new GameOverEventArgs() {
-                Winner = CurrentGame.Winner,
-                Message = CurrentGame.GameOverMessage,
-            };
-            Application.Current.Dispatcher.Invoke(new Action(() => GameOverEventHandler(this, e)));
-        } 
-        else if (CurrentGame.CurrentTurn == OpponentColor) {
-            var task = new Task(MoveAI);
-            task.Start();
-        }
+    private void NotifyGameOver() {
+        var e = new GameOverEventArgs() {
+            Winner = CurrentGame.Winner,
+            Message = CurrentGame.GameOverMessage,
+        };
+        Application.Current.Dispatcher.Invoke(new Action(() => GameOverEventHandler(this, e)));
     }
 
     private void MoveAI() {

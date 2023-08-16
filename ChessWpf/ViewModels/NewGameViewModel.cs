@@ -5,7 +5,8 @@ using System;
 using System.ComponentModel;
 using System.Dynamic;
 
-namespace ChessWpf; 
+namespace ChessWpf;
+
 public class NewGameViewModel : BindableBase, INotifyPropertyChanged, INewGameViewModel {
 
     private IBoardModel _boardModelManager;

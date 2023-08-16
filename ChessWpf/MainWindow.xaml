@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChessWpf"
         mc:Ignorable="d"
-        Title="ChessSharp" Height="610" Width="580">
+        Title="ChessWpf">
 
     <Grid>
         <local:MenuView/>

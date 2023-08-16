@@ -8,7 +8,7 @@ using System.Linq;
 using System.Windows.Data;
 using ChessEngine;
 
-namespace ChessWpf.ViewModels; 
+namespace ChessWpf; 
 
 public class BoardViewModel : BindableBase, IBoardViewModel {
 

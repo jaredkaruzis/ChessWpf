@@ -1,2 +1,3 @@
 ﻿namespace ChessWpf;
-public interface IMainWindow{}
+
+public interface IMainWindow { }

@@ -1,9 +1,6 @@
-﻿using ChessWpf.ViewModels;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Mvvm;
-using System;
 using System.Dynamic;
-using System.Windows;
 
 namespace ChessWpf;
 
@@ -14,7 +11,7 @@ public class MenuViewModel : BindableBase, IMenuViewModel {
     public dynamic Commands { get; } = new ExpandoObject();
 
 
-    public MenuViewModel(INewGameManager newGameManager) {
+    public MenuViewModel(INewGameManager newGameManager, IExportManager exportManager) {
         _newGameManager = newGameManager;
 
         Commands.StartNewGame = new DelegateCommand(StartNewGame);

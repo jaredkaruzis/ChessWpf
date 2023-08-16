@@ -1,5 +1,4 @@
 ﻿using ChessEngine;
-using ChessWpf.ViewModels;
 using System;
 
 namespace ChessWpf;
