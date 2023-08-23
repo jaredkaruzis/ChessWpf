@@ -94,15 +94,17 @@ public class BoardModel : IBoardModel {
         SubmitMove(move[0], move[1]);
     }
 
-    private List<Square> FlattenSquares() {
-        var squares = new List<Square>();
+    private List<SquareModel> FlattenSquares() {
+        var squares = new List<SquareModel>();
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (OpponentColor == Color.Black) {
-                    squares.Add(CurrentGame.Squares[j, i]);
+                    var square = new SquareModel(CurrentGame.Squares[j, i]);
+                    squares.Add(square);
                 }
                 else if (OpponentColor == Color.White) {
-                    squares.Add(CurrentGame.Squares[7 - j, 7 - i]);
+                    var square = new SquareModel(CurrentGame.Squares[7 - j, 7 - i]);
+                    squares.Add(square);
                 }
             }
         }

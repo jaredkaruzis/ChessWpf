@@ -15,8 +15,8 @@ public class SquareButton : BindableBase {
 
     public event EventHandler<HighlightSquaresArgs> HighlightSquares;
 
-    public Square Square;   // TODO REMOVE BOARD REFERENCE
-    private Piece _piece;   // TODO REMOVE BOARD REFERENCE
+    public SquareModel Square;
+    private PieceModel _piece;
 
     private SolidColorBrush RedBrush = new SolidColorBrush(Colors.Red);
     private SolidColorBrush LightGrayBrush = new SolidColorBrush(Colors.LightGray);
@@ -25,25 +25,13 @@ public class SquareButton : BindableBase {
 
     private SolidColorBrush BackgroundBrush;
 
-    public Piece Piece {
+    public PieceModel Piece {
         get => _piece;
         set {
             SetProperty(ref _piece, value);
-            if (value != null) {
-                ImagePath = Piece.Color == ChessEngine.Color.White ? whitePieceImages[Piece.Type] : blackPieceImages[Piece.Type];
-            } else {
-                ImagePath = "Images/empty.png";
-            }
+            ImagePath = GetImagePath();
         }
-    }
-
-    private SolidColorBrush GetBackground() {
-        if (Square.X % 2 == 0) {
-            return Square.Y % 2 == 0 ? LightGrayBrush : DarkGrayBrush;
-        } else {
-            return Square.Y % 2 == 1 ? LightGrayBrush : DarkGrayBrush;
-        }
-    }
+    } 
 
     private string _imagePath;
     public string ImagePath {
@@ -75,7 +63,7 @@ public class SquareButton : BindableBase {
         set => SetProperty(ref _buttonColor, value);
     }
 
-    public SquareButton(Square s) {
+    public SquareButton(SquareModel s) {
         Square = s;
         BackgroundBrush = GetBackground();
         ButtonColor = BackgroundBrush;
@@ -84,16 +72,23 @@ public class SquareButton : BindableBase {
     }
 
     public void Select() {
-        var moves = new List<int[]>();
-        if (Piece != null) {
-            foreach (var square in Piece.Moves) {
-                moves.Add(new int[2] { square.X, square.Y });
-            }
-        }
-
         Application.Current.Dispatcher.Invoke(new Action(() => {
-            HighlightSquares?.Invoke(this, new HighlightSquaresArgs(this, moves));
+            HighlightSquares?.Invoke(this, new HighlightSquaresArgs(this, Piece?.Moves));
         }));
+    }
+
+    private SolidColorBrush GetBackground() {
+        return Square.X % 2 == 0 ?
+            (Square.Y % 2 == 0 ? LightGrayBrush : DarkGrayBrush) :
+            (Square.Y % 2 == 1 ? LightGrayBrush : DarkGrayBrush);
+    }
+
+    private string GetImagePath() {
+        if (Piece != null) {
+            return Piece.Color == ChessEngine.Color.White ? whitePieceImages[Piece.Type] : blackPieceImages[Piece.Type];
+        } else {
+            return "Images/empty.png";
+        }
     }
 
     public static Dictionary<PieceType, string> whitePieceImages = new Dictionary<PieceType, string>() {

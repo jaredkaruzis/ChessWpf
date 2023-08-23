@@ -5,5 +5,5 @@ using System.Collections.Generic;
 namespace ChessWpf;
 
 public class RefreshBoardEventArgs : EventArgs {
-    public List<Square> Squares { get; set; }
+    public List<SquareModel> Squares { get; set; }
 }

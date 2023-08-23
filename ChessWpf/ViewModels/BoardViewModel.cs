@@ -33,7 +33,6 @@ public class BoardViewModel : BindableBase, IBoardViewModel {
     public BoardViewModel(IBoardModel boardModel) {
         _boardModelManager = boardModel;
         _boardModelManager.RefreshBoardEventHandler += OnRefreshBoard;
-        _boardModelManager.GameOverEventHandler += OnGameOver;
 
         Squares = CollectionViewSource.GetDefaultView(SquareButtons);
         Commands.ResetGame = new DelegateCommand(ResetGame);
@@ -41,7 +40,7 @@ public class BoardViewModel : BindableBase, IBoardViewModel {
         _boardModelManager.StartNewGame();
     }
 
-    public void Refresh(List<Square> inSquares) {
+    public void Refresh(List<SquareModel> inSquares) {
         SquareButtons.Clear();
         foreach (var s in inSquares) {
             var squareButton = new SquareButton(s);
@@ -55,38 +54,29 @@ public class BoardViewModel : BindableBase, IBoardViewModel {
         Refresh(e.Squares);
     }
 
-    public void OnGameOver(object sender, GameOverEventArgs e) {
-        Console.WriteLine("Probably Not");
-    }
-
     public void OnSquareSelected(object sender, HighlightSquaresArgs e) {
         
         // This is the first click, starting off fresh. No need to reset anything
         if (_originSquare == null) {
-            
-            // Clicked an empty square
-            if (e.clicked.Piece == null) {
-                return;
+
+            if (e.clicked.Piece == null) {      
+                return; // Clicked an empty square, cancel selection
             }
-            else {
-                // If we clicked a not-turn piece, cancel
-                if (e.clicked.Piece.Color != _boardModelManager.CurrentTurn()) {
-                    return;
-                }
+            if (e.clicked.Piece.Color != _boardModelManager.CurrentTurn()) {    
+                return; // Clicked a enemy piece, cancel selection
+            }
 
-                // Select this piece and highlight its moves
-                _originSquare = e.clicked;
-                _originSquare.Selected = true;
+            // Select this piece and highlight its moves
+            _originSquare = e.clicked;
+            _originSquare.Selected = true;
 
-                foreach (var s in SquareButtons) {
-                    foreach (var move in e.squares) {
-                        if (s.Square.X == move[0] && s.Square.Y == move[1]) {
-                            s.Highlighted = true;
-                            _highlightedSquares.Add(s);
-                        }
+            foreach (var s in SquareButtons) {
+                foreach (var move in e.squares) {
+                    if (s.Square.X == move[0] && s.Square.Y == move[1]) {
+                        s.Highlighted = true;
+                        _highlightedSquares.Add(s);
                     }
                 }
-                return;
             }
         }   
         // Second click. Activate move OR deselect current piece AND/OR select a new piece
@@ -110,8 +100,8 @@ public class BoardViewModel : BindableBase, IBoardViewModel {
 
                         ClearHighlightedSquares();
                         _originSquare.Selected = false;
-                        if (!_boardModelManager.SubmitMove(_originSquare.Square, e.clicked.Square)) {
-                            // Error?
+                        if (!_boardModelManager.SubmitMove(_originSquare.Square.SquareReference, e.clicked.Square.SquareReference)) {
+                            //TODO Error Handling? //TODO Figure out how to process moves into notation of some kind 
                         }
                         _originSquare.Piece = null;
                         _originSquare = null;
