@@ -9,20 +9,16 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <DockPanel>
+    <Menu DockPanel.Dock="Top">
 
-        <Menu DockPanel.Dock="Top">
-            
-            <MenuItem Header="_File">
+        <MenuItem Header="_File">
 
-                <MenuItem Header="_New Game" Command="{Binding Commands.StartNewGame}"/>
-                <MenuItem Header="_Import" Command="{Binding Commands.ImportGame}"/>
-                <MenuItem Header="_Export" Command="{Binding Commands.ExportGame}"/>
-                
-            </MenuItem>
-            
-        </Menu>
-        
-    </DockPanel>
-    
+            <MenuItem Header="_New Game" Command="{Binding Commands.StartNewGame}"/>
+            <MenuItem Header="_Import" Command="{Binding Commands.ImportGame}"/>
+            <MenuItem Header="_Export" Command="{Binding Commands.ExportGame}"/>
+
+        </MenuItem>
+
+    </Menu>
+
 </UserControl>
