@@ -1,5 +1,4 @@
 ﻿using ChessEngine;
-using System;
 using System.Linq;
 using System.Dynamic;
 using System.Windows.Data;

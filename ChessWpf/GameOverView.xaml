@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="ChessWpf.GameOverView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChessWpf"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d"
+             Width="250" MaxHeight="150" >
+    
+    <UserControl.Resources>
+        <local:BoolToBorderBrushConverter x:Key="BoolToBrush"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+    </UserControl.Resources>
+    
+    <StackPanel Visibility="{Binding IsGameOver, Converter={StaticResource BoolToVisibility}}" HorizontalAlignment="Center" Background="LightGray">
+
+        <Label HorizontalAlignment="Center">Game Over</Label>
+        <Label HorizontalAlignment="Center" Content="{Binding WinnerName}"/>
+        <Label HorizontalAlignment="Center">wins</Label>
+
+        <Button Command="{Binding Commands.StartNewGame}"  Background="Green">Start New Game</Button>
+        <Button Command="{Binding Commands.ExportGame}" Background="Green">Continue Game</Button>
+
+    </StackPanel>
+</UserControl>

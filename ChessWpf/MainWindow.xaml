@@ -11,6 +11,7 @@
         <local:MenuView/>
         <local:BoardView/>
         <local:NewGameView/>
+        <local:GameOverView/>
     </Grid>
     
 </Window>
