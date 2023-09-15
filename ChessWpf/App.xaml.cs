@@ -18,6 +18,8 @@ public partial class App {
         container.RegisterType<IMenuViewModel, MenuViewModel>();
         container.RegisterType<INewGameViewModel, NewGameViewModel>();
         container.RegisterType<IGameOverViewModel, GameOverViewModel>();
+        container.RegisterType<IPromotePieceViewModel, PromotePieceViewModel>();
+        container.RegisterType<IMoveListViewModel, MoveListViewModel>();
 
         container.RegisterType<IMainWindow, MainWindow>();
 
@@ -25,6 +27,8 @@ public partial class App {
         ViewModelLocationProvider.SetDefaultViewModelFactory((IBoardViewModel) => container.Resolve(IBoardViewModel));
         ViewModelLocationProvider.SetDefaultViewModelFactory((INewGameViewModel) => container.Resolve(INewGameViewModel));
         ViewModelLocationProvider.SetDefaultViewModelFactory((IGameOverViewModel) => container.Resolve(IGameOverViewModel));
+        ViewModelLocationProvider.SetDefaultViewModelFactory((IPromotePieceViewModel) => container.Resolve(IPromotePieceViewModel));
+        ViewModelLocationProvider.SetDefaultViewModelFactory((IMoveListViewModel) => container.Resolve(IMoveListViewModel));
 
         var mainWindow = container.Resolve<MainWindow>();
         mainWindow.Show();

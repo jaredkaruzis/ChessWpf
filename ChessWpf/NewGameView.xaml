@@ -16,9 +16,6 @@
 
     <StackPanel Visibility="{Binding IsStartingNewGame, Converter={StaticResource BoolToVisibility}}" HorizontalAlignment="Center" Background="LightGray">
 
-        <Label HorizontalAlignment="Center">Player Name</Label>
-        <TextBox Width="200" Text="{Binding PlayerName}"/>
-
         <Label HorizontalAlignment="Center">Select Color</Label>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Button BorderBrush="{Binding PlayerIsBlack, Converter={StaticResource BoolToBrush}}" Command="{Binding Commands.SelectBlack}" Background="Black" Width="50" Height="50"/>

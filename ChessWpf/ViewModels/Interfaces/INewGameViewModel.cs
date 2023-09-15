@@ -6,7 +6,6 @@ public interface INewGameViewModel {
 
     public bool IsStartingNewGame { get; set; }
     public Color PlayerColor { get; set; }
-    public string PlayerName { get; set; }
     public int AiLevel { get; set; }
 
     public bool PlayerIsWhite { get; set; }

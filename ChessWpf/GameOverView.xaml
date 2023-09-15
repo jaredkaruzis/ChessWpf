@@ -7,21 +7,22 @@
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d"
-             Width="250" MaxHeight="150" >
+             Width="250" MaxHeight="150">
     
     <UserControl.Resources>
         <local:BoolToBorderBrushConverter x:Key="BoolToBrush"/>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
     </UserControl.Resources>
-    
+
     <StackPanel Visibility="{Binding IsGameOver, Converter={StaticResource BoolToVisibility}}" HorizontalAlignment="Center" Background="LightGray">
 
         <Label HorizontalAlignment="Center">Game Over</Label>
         <Label HorizontalAlignment="Center" Content="{Binding WinnerName}"/>
-        <Label HorizontalAlignment="Center">wins</Label>
+        <Label HorizontalAlignment="Center" Content="{Binding WinMessage}"/>
 
-        <Button Command="{Binding Commands.StartNewGame}"  Background="Green">Start New Game</Button>
-        <Button Command="{Binding Commands.ExportGame}" Background="Green">Continue Game</Button>
+        <Button Command="{Binding Commands.StartNewGame}"  Background="Green" Margin="25 10 25 10">Start New Game</Button>
+        <Button Command="{Binding Commands.ExportGame}" Background="Green" Margin="25 0 25 10">Continue Game</Button>
 
     </StackPanel>
+    
 </UserControl>

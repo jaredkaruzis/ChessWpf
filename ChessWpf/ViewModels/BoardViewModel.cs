@@ -11,20 +11,17 @@ namespace ChessWpf;
 
 public class BoardViewModel : BindableBase, IBoardViewModel {
 
+    private readonly IBoardModel _boardModelManager;
+
     private List<SquareButton> _squareButtons = new List<SquareButton>();
     public List<SquareButton> SquareButtons {
         get => _squareButtons;
-        set {
-            _squareButtons = value;
-            SetProperty(ref _squareButtons, value);
-        }
+        set => SetProperty(ref _squareButtons, value);
     }
 
     public ICollectionView Squares { get; private set; }
 
     public dynamic Commands { get; } = new ExpandoObject();
-
-    private IBoardModel _boardModelManager;
 
     private SquareButton _originSquare;
     private List<SquareButton> _highlightedSquares = new List<SquareButton>();
@@ -36,7 +33,7 @@ public class BoardViewModel : BindableBase, IBoardViewModel {
         Squares = CollectionViewSource.GetDefaultView(SquareButtons);
         Commands.ResetGame = new DelegateCommand(ResetGame);
 
-        _boardModelManager.StartNewGame();
+        LoadDummyBoard();
     }
 
     public void Refresh(List<SquareModel> inSquares) {
@@ -99,6 +96,7 @@ public class BoardViewModel : BindableBase, IBoardViewModel {
 
                         ClearHighlightedSquares();
                         _originSquare.Selected = false;
+
                         if (!_boardModelManager.SubmitMove(_originSquare.Square.SquareReference, e.clicked.Square.SquareReference)) {
                             //TODO Error Handling? //TODO Figure out how to process moves into notation of some kind 
                         }
@@ -144,5 +142,11 @@ public class BoardViewModel : BindableBase, IBoardViewModel {
 
     public void ResetGame() {
         _boardModelManager.StartNewGame(Color.White);
+    }
+
+    private void LoadDummyBoard() {
+        for (int i = 0; i < 64; i++) {
+            SquareButtons.Add(new SquareButton(new SquareModel(new Square(i / 8, i % 8))));
+        }
     }
 }

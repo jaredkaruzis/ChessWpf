@@ -30,7 +30,6 @@ public class NewGameViewModel : BindableBase, INotifyPropertyChanged, INewGameVi
         set => SetProperty(ref _playerIsBlack, value); 
     }
 
-    public string PlayerName { get; set; }
     public Color PlayerColor { get; set; }
     public int AiLevel { get; set; }
     public dynamic Commands { get; } = new ExpandoObject();
@@ -45,7 +44,7 @@ public class NewGameViewModel : BindableBase, INotifyPropertyChanged, INewGameVi
         Commands.SelectWhite = new DelegateCommand(SelectWhite);
         Commands.SelectBlack = new DelegateCommand(SelectBlack);
 
-        IsStartingNewGame = false;
+        IsStartingNewGame = true;
     }
 
     public void Awake(object sender, EventArgs e) {
@@ -53,7 +52,7 @@ public class NewGameViewModel : BindableBase, INotifyPropertyChanged, INewGameVi
     }
 
     public void StartNewGame() {
-        _boardModelManager.StartNewGame(PlayerColor, AiLevel, PlayerName);
+        _boardModelManager.StartNewGame(PlayerColor, AiLevel);
         IsStartingNewGame = false;
     }
 

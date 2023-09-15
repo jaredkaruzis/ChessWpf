@@ -40,12 +40,14 @@ public class GameOverViewModel : BindableBase, IGameOverViewModel{
 
     private void StartNewGame() {
         IsGameOver = false;
+        WinMessage = string.Empty;
+        WinnerName = string.Empty;
         _newGameManager.OpenNewGameMenu();
     }
 
     private void HandleGameOver(object sender, GameOverEventArgs e) {
         IsGameOver = true;
-        WinnerName = e.Winner == ChessEngine.Color.White ? "White" : e.Winner == ChessEngine.Color.Black ? "Black" : "Draw!";
+        WinnerName = e.Winner == ChessEngine.Color.White ? "White wins!" : e.Winner == ChessEngine.Color.Black ? "Black wins!" : "Draw!";
         WinMessage = e.Message;
     }
 }

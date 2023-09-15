@@ -7,12 +7,14 @@ namespace ChessWpf;
 public class MenuViewModel : BindableBase, IMenuViewModel {
 
     private readonly INewGameManager _newGameManager;
+    private readonly IExportManager _exportManager;
 
     public dynamic Commands { get; } = new ExpandoObject();
 
 
     public MenuViewModel(INewGameManager newGameManager, IExportManager exportManager) {
         _newGameManager = newGameManager;
+        _exportManager = exportManager;
 
         Commands.StartNewGame = new DelegateCommand(StartNewGame);
         Commands.StartExportGame = new DelegateCommand(StartExportGame);
@@ -24,7 +26,7 @@ public class MenuViewModel : BindableBase, IMenuViewModel {
     }
 
     public void StartExportGame() {
-
+        _exportManager.Export();
     }
 
     public void StartImportGame() {

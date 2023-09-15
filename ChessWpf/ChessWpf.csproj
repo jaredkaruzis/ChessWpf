@@ -28,40 +28,40 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Chess_bdt60.png">
+    <Resource Include="Images\blackbishop.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Chess_blt60.png">
+    <Resource Include="Images\whitebishop.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Chess_kdt60.png">
+    <Resource Include="Images\blackking.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Chess_klt60.png">
+    <Resource Include="Images\whiteking.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Chess_ndt60.png">
+    <Resource Include="Images\blackknight.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Chess_nlt60.png">
+    <Resource Include="Images\whiteknight.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Chess_pdt60.png">
+    <Resource Include="Images\blackpawn.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Chess_plt60.png">
+    <Resource Include="Images\whitepawn.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Chess_qdt60.png">
+    <Resource Include="Images\blackqueen.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Chess_qlt60.png">
+    <Resource Include="Images\whitequeen.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Chess_rdt60.png">
+    <Resource Include="Images\blackrook.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Chess_rlt60.png">
+    <Resource Include="Images\whiterook.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

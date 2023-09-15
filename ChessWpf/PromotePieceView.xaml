@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="ChessWpf.PromotePieceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChessWpf"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             Height="100">
+
+    <UserControl.Resources>
+        <local:BoolToBorderBrushConverter x:Key="BoolToBrush"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+    </UserControl.Resources>
+
+    <StackPanel Visibility="{Binding IsPromotingPiece, Converter={StaticResource BoolToVisibility}}" HorizontalAlignment="Center" Background="LightGray">
+
+        <Label HorizontalAlignment="Center">Select Piece Type For Promotion</Label>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Command="{Binding Commands.SelectKnight}" Width="50" Height="50">
+                <Image Source="{Binding KnightImagePath}"/>
+            </Button>
+            <Button Command="{Binding Commands.SelectBishop}" Width="50" Height="50">
+                <Image Source="{Binding BishopImagePath}"/>
+            </Button>
+            <Button Command="{Binding Commands.SelectRook}" Width="50" Height="50">
+                <Image Source="{Binding RookImagePath}"/>
+            </Button>
+            <Button Command="{Binding Commands.SelectQueen}" Width="50" Height="50">
+                <Image Source="{Binding QueenImagePath}"/>
+            </Button>
+        </StackPanel>
+
+    </StackPanel>
+</UserControl>

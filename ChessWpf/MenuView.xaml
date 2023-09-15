@@ -14,8 +14,8 @@
         <MenuItem Header="_File">
 
             <MenuItem Header="_New Game" Command="{Binding Commands.StartNewGame}"/>
-            <MenuItem Header="_Import" Command="{Binding Commands.ImportGame}"/>
-            <MenuItem Header="_Export" Command="{Binding Commands.ExportGame}"/>
+            <MenuItem Header="_Import" Command="{Binding Commands.StartImportGame}"/>
+            <MenuItem Header="_Export" Command="{Binding Commands.StartExportGame}"/>
 
         </MenuItem>
 

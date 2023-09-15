@@ -3,10 +3,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ChessWpf"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d"
+             MaxHeight="525">
 
-    </Grid>
+    <StackPanel Margin="5 -10 5 0" Width="175" MaxHeight="540">
+
+        <Label HorizontalAlignment="Center">Move List</Label>
+
+        <ListView ItemsSource="{Binding MoveList}" BorderThickness="0">
+            
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="BorderThickness" Value="1 1 0 0" />
+                    <Setter Property="BorderBrush" Value="Black" />
+                    <Setter Property="Focusable" Value="False"/>
+                    <Setter Property="IsHitTestVisible" Value="False"/>
+                    <Setter Property="Padding" Value="2"/>
+                    <Setter Property="Margin" Value="0 0 0 0"/>
+                    <Setter Property="FontSize" Value="20"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="2"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding}" Padding="0" BorderThickness="0"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+
+    </StackPanel>
+
 </UserControl>

@@ -5,13 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChessWpf"
         mc:Ignorable="d"
-        Title="ChessWpf">
+        Title="ChessWpf"
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize">
 
-    <Grid>
-        <local:MenuView/>
-        <local:BoardView/>
-        <local:NewGameView/>
-        <local:GameOverView/>
-    </Grid>
+    <StackPanel Orientation="Vertical">
+        
+        <local:MenuView />
     
+        <StackPanel Orientation="Horizontal">
+            <StackPanel>
+                <Grid>
+                    <local:BoardView />
+                    <local:NewGameView />
+                    <local:GameOverView />
+                    <local:PromotePieceView />
+                </Grid>
+            </StackPanel>
+            <Grid>
+                <local:MoveListView />
+            </Grid>
+        </StackPanel>
+    </StackPanel>
+
 </Window>

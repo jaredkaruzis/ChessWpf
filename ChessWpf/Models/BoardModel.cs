@@ -1,8 +1,8 @@
 ﻿using ChessEngine;
 using System;
 using System.Windows;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ChessWpf; 
 
@@ -10,37 +10,27 @@ public class BoardModel : IBoardModel {
 
     public Board CurrentGame { get; set; }
 
-    public string WhitePlayerName { get; set; }
-    public string BlackPlayerName { get; set; }
-
     public int OpponenetLevel { get; set; }     // level 1 = easy, level 2 = medium, level 3 = hard
 
     public Color OpponentColor { get; set; }
 
     public EventHandler<RefreshBoardEventArgs> RefreshBoardEventHandler { get; set; }
+    public EventHandler<RefreshMoveListEventArgs> RefreshMoveListEventHandler { get; set; }
     public EventHandler<GameOverEventArgs> GameOverEventHandler { get; set; }
+    public EventHandler<PromotePieceEventArgs> PromotePieceEventHandler{ get; set; }
 
-    public BoardModel() { }
+    public BoardModel() {}
 
     public void StartNewGame(Color PlayerColor = Color.White) {
         OpponentColor = PlayerColor == Color.Black ? Color.White : Color.Black;
         OpponenetLevel = 2;
-        WhitePlayerName = "Player";
         CurrentGame = new Board();
         Refresh();
     }
 
-    public void StartNewGame(Color PlayerColor, int AiLevel, string playerName) {
+    public void StartNewGame(Color PlayerColor, int AiLevel) {
         OpponentColor = PlayerColor == Color.Black ? Color.White : Color.Black;
         OpponenetLevel = AiLevel;
-        if (PlayerColor == Color.White) {
-            WhitePlayerName = playerName;
-            BlackPlayerName = "AI";
-        }
-        else {
-            WhitePlayerName = "AI";
-            BlackPlayerName = playerName;
-        }
         CurrentGame = new Board();
         Refresh();
     }
@@ -51,8 +41,12 @@ public class BoardModel : IBoardModel {
         return success;
     }
 
-    public bool SubmitMove(Square origin, Square destination) {
-        var success = CurrentGame.SubmitMove(origin, destination);
+    public bool SubmitMove(Square origin, Square destination, PieceType promotionType = PieceType.Empty) {
+        if (origin.Piece.IsPawn && (destination.Y == 0 || destination.Y == 7) && promotionType == PieceType.Empty) {
+            WaitForPiecePromotion(origin, destination);
+            return false;
+        }
+        var success = CurrentGame.SubmitMove(origin, destination, promotionType);
         Refresh();
         return success;
     }
@@ -64,21 +58,29 @@ public class BoardModel : IBoardModel {
 
     private void Refresh() {
         RefreshBoard();
-
+        RefreshMoveList();
+      
         if (CurrentGame.GameOver) {
             NotifyGameOver();
         } 
-        else if (CurrentGame.CurrentTurn == OpponentColor) {
-            var aiTask = new Task(MoveAI);
-            aiTask.Start();
-        }
+        //else if (CurrentGame.CurrentTurn == OpponentColor) {
+        //    var aiTask = new Task(MoveAI);
+        //    aiTask.Start();
+        //}
     }
 
     private void RefreshBoard() {
-        var args = new RefreshBoardEventArgs() {
+        var e = new RefreshBoardEventArgs() {
             Squares = FlattenSquares(),
         };
-        Application.Current.Dispatcher.Invoke(new Action(() => RefreshBoardEventHandler(this, args)));
+        Application.Current.Dispatcher.Invoke(new Action(() => RefreshBoardEventHandler(this, e)));
+    }
+
+    private void RefreshMoveList() {
+        var e = new RefreshMoveListEventArgs() {
+            MoveList = CurrentGame.MoveHistory.Select(move => move.AlgebraicNotation).ToList(),
+        };
+        Application.Current.Dispatcher.Invoke(new Action(() => RefreshMoveListEventHandler(this, e)));   
     }
 
     private void NotifyGameOver() {
@@ -89,9 +91,12 @@ public class BoardModel : IBoardModel {
         Application.Current.Dispatcher.Invoke(new Action(() => GameOverEventHandler(this, e)));
     }
 
-    private void MoveAI() {
-        var move = AI.MinmaxMove(CurrentGame, OpponenetLevel);
-        SubmitMove(move[0], move[1]);
+    private void WaitForPiecePromotion(Square origin, Square destination) {
+        var e = new PromotePieceEventArgs() {
+            OriginSquare = origin,
+            DestinationSquare = destination,
+        };
+        Application.Current.Dispatcher.Invoke(new Action(() => PromotePieceEventHandler(this, e)));
     }
 
     private List<SquareModel> FlattenSquares() {
