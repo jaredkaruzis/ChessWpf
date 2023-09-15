@@ -92,19 +92,20 @@ public class SquareButton : BindableBase {
     }
 
     public static Dictionary<PieceType, string> whitePieceImages = new Dictionary<PieceType, string>() {
-            {PieceType.Bishop, "Images/Chess_blt60.png" },
-            {PieceType.King, "Images/Chess_klt60.png" },
-            {PieceType.Knight, "Images/Chess_nlt60.png" },
-            {PieceType.Pawn, "Images/Chess_plt60.png" },
-            {PieceType.Queen, "Images/Chess_qlt60.png" },
-            {PieceType.Rook, "Images/Chess_rlt60.png" },
-        };
+            {PieceType.Bishop, "Images/whitebishop.png" },
+            {PieceType.King, "Images/whiteking.png" },
+            {PieceType.Knight, "Images/whiteknight.png" },
+            {PieceType.Pawn, "Images/whitepawn.png" },
+            {PieceType.Queen, "Images/whitequeen.png" },
+            {PieceType.Rook, "Images/whiterook.png" },
+    };
+
     public static Dictionary<PieceType, string> blackPieceImages = new Dictionary<PieceType, string>() {
-            {PieceType.Bishop, "Images/Chess_bdt60.png" },
-            {PieceType.King, "Images/Chess_kdt60.png" },
-            {PieceType.Knight, "Images/Chess_ndt60.png" },
-            {PieceType.Pawn, "Images/Chess_pdt60.png" },
-            {PieceType.Queen, "Images/Chess_qdt60.png" },
-            {PieceType.Rook, "Images/Chess_rdt60.png" },
-        };
+            {PieceType.Bishop, "Images/blackbishop.png" },
+            {PieceType.King, "Images/blackking.png" },
+            {PieceType.Knight, "Images/blackknight.png" },
+            {PieceType.Pawn, "Images/blackpawn.png" },
+            {PieceType.Queen, "Images/blackqueen.png" },
+            {PieceType.Rook, "Images/blackrook.png" },
+    };
 }
