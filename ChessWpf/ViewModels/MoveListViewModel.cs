@@ -21,6 +21,13 @@ public class MoveListViewModel : BindableBase, IMoveListViewModel {
     }
 
     public void Refresh(object sender, RefreshMoveListEventArgs e) {
-        MoveList = e.MoveList.Chunk(2).Select(moveRow => new MoveListModel(moveRow)).ToList();
+        var moves = new List<MoveListModel>();
+
+        var chunks = e.MoveList.Chunk(2).ToList();
+        for (int i = 0; i < chunks.Count(); i++) {
+            moves.Add(new MoveListModel(chunks[i], i + 1));
+        }
+
+        MoveList = moves;
     }
 }

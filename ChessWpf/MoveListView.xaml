@@ -8,41 +8,18 @@
              mc:Ignorable="d"
              MaxHeight="525">
 
-    <StackPanel Margin="5 -10 5 0" Width="175" MaxHeight="540">
+    <StackPanel Margin="5 -10 7 0" Width="175" MaxHeight="540">
 
         <Label HorizontalAlignment="Center">Move List</Label>
 
-        <ListView ItemsSource="{Binding MoveList}" BorderThickness="0">
-            
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="BorderThickness" Value="1 1 1 0" />
-                    <Setter Property="BorderBrush" Value="Black" />
-                    <Setter Property="Focusable" Value="False"/>
-                    <Setter Property="IsHitTestVisible" Value="False"/>
-                    <Setter Property="Padding" Value="2"/>
-                    <Setter Property="Margin" Value="0 0 0 0"/>
-                    <Setter Property="FontSize" Value="20"/>
-                </Style>
-            </ListBox.ItemContainerStyle>
-            
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Vertical"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
+        <DataGrid ItemsSource="{Binding MoveList}" BorderThickness="1" HeadersVisibility="None" CanUserResizeColumns="False" AutoGenerateColumns="False" IsReadOnly="True" IsHitTestVisible="False">
 
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Button Content="{Binding WhiteMove}" HorizontalContentAlignment="Left" Padding="0" BorderThickness="0" Width="83"/>
-                        <Button Content="{Binding BlackMove}" HorizontalContentAlignment="Left" Padding="0" BorderThickness="0" Width="83"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Index}" Width="25" />
+                <DataGridTextColumn Binding="{Binding WhiteMove}" Width="74"/>
+                <DataGridTextColumn Binding="{Binding BlackMove}" Width="74"/>
+            </DataGrid.Columns>
 
-        </ListView>
-
+        </DataGrid>
     </StackPanel>
-
 </UserControl>

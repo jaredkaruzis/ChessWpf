@@ -10,7 +10,7 @@ public partial class App {
         base.OnStartup(e);
         IUnityContainer container = new UnityContainer();
 
-        container.RegisterSingleton<IBoardManager, BoardModel>();
+        container.RegisterSingleton<IBoardManager, BoardManager>();
         container.RegisterSingleton<INewGameManager, NewGameManager>();
         container.RegisterSingleton<IExportManager, ExportManager>();
         container.RegisterSingleton<IImportManager, ImportManager>();

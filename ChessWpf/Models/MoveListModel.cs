@@ -4,6 +4,12 @@ namespace ChessWpf;
 
 public class MoveListModel : BindableBase {
 
+    private int _index = 0;
+    public int Index {
+        get => _index;
+        set => SetProperty(ref _index, value);
+    }
+
     private string _whiteMove;
     public string WhiteMove { 
         get => _whiteMove;
@@ -16,9 +22,11 @@ public class MoveListModel : BindableBase {
         set => SetProperty(ref _blackMove, value);
     }
 
-    public MoveListModel(string[] chunk) {
+    public MoveListModel(string[] chunk, int moveNumber) {
         _whiteMove = string.Empty;
         _blackMove = string.Empty;
+
+        Index = moveNumber;
 
         if (chunk.Length > 0) {
             _whiteMove = chunk[0];
