@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace ChessWpf; 
 
-public class BoardModel : IBoardModel {
+public class BoardModel : IBoardManager {
 
     public Board CurrentGame { get; set; }
 

@@ -10,9 +10,10 @@ public partial class App {
         base.OnStartup(e);
         IUnityContainer container = new UnityContainer();
 
-        container.RegisterSingleton<IBoardModel, BoardModel>();
+        container.RegisterSingleton<IBoardManager, BoardModel>();
         container.RegisterSingleton<INewGameManager, NewGameManager>();
         container.RegisterSingleton<IExportManager, ExportManager>();
+        container.RegisterSingleton<IImportManager, ImportManager>();
 
         container.RegisterType<IBoardViewModel, BoardViewModel>();
         container.RegisterType<IMenuViewModel, MenuViewModel>();
@@ -20,7 +21,7 @@ public partial class App {
         container.RegisterType<IGameOverViewModel, GameOverViewModel>();
         container.RegisterType<IPromotePieceViewModel, PromotePieceViewModel>();
         container.RegisterType<IMoveListViewModel, MoveListViewModel>();
-
+        
         container.RegisterType<IMainWindow, MainWindow>();
 
         ViewModelLocationProvider.SetDefaultViewModelFactory((IMenuViewModel) => container.Resolve(IMenuViewModel));
@@ -29,6 +30,7 @@ public partial class App {
         ViewModelLocationProvider.SetDefaultViewModelFactory((IGameOverViewModel) => container.Resolve(IGameOverViewModel));
         ViewModelLocationProvider.SetDefaultViewModelFactory((IPromotePieceViewModel) => container.Resolve(IPromotePieceViewModel));
         ViewModelLocationProvider.SetDefaultViewModelFactory((IMoveListViewModel) => container.Resolve(IMoveListViewModel));
+        ViewModelLocationProvider.SetDefaultViewModelFactory((IImportManager) => container.Resolve(IImportManager));
 
         var mainWindow = container.Resolve<MainWindow>();
         mainWindow.Show();

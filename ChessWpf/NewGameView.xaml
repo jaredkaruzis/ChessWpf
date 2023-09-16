@@ -18,8 +18,8 @@
 
         <Label HorizontalAlignment="Center">Select Color</Label>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button BorderBrush="{Binding PlayerIsBlack, Converter={StaticResource BoolToBrush}}" Command="{Binding Commands.SelectBlack}" Background="Black" Width="50" Height="50"/>
             <Button BorderBrush="{Binding PlayerIsWhite, Converter={StaticResource BoolToBrush}}" Command="{Binding Commands.SelectWhite}" Background="White" Width="50" Height="50"/>
+            <Button BorderBrush="{Binding PlayerIsBlack, Converter={StaticResource BoolToBrush}}" Command="{Binding Commands.SelectBlack}" Background="Black" Width="50" Height="50"/>
         </StackPanel>
 
         <Label HorizontalAlignment="Center">AI Level</Label>

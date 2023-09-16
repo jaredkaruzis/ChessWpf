@@ -9,7 +9,7 @@ namespace ChessWpf;
 
 public class NewGameViewModel : BindableBase, INotifyPropertyChanged, INewGameViewModel {
 
-    private IBoardModel _boardModelManager;
+    private IBoardManager _boardModelManager;
     private INewGameManager _newGameManager;
 
     private bool _isStartingNewGame;
@@ -34,7 +34,7 @@ public class NewGameViewModel : BindableBase, INotifyPropertyChanged, INewGameVi
     public int AiLevel { get; set; }
     public dynamic Commands { get; } = new ExpandoObject();
 
-    public NewGameViewModel(IBoardModel boardModel, INewGameManager newGameManager) {
+    public NewGameViewModel(IBoardManager boardModel, INewGameManager newGameManager) {
         _boardModelManager = boardModel;
         _newGameManager = newGameManager;
 
@@ -45,10 +45,12 @@ public class NewGameViewModel : BindableBase, INotifyPropertyChanged, INewGameVi
         Commands.SelectBlack = new DelegateCommand(SelectBlack);
 
         IsStartingNewGame = true;
+        SelectWhite();
     }
 
     public void Awake(object sender, EventArgs e) {
         IsStartingNewGame = true;
+        SelectWhite();
     }
 
     public void StartNewGame() {

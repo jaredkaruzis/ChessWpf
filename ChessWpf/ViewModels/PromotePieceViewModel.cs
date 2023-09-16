@@ -7,13 +7,12 @@ namespace ChessWpf;
 
 public class PromotePieceViewModel : BindableBase, IPromotePieceViewModel {
 
-    public readonly IBoardModel _boardModel;
+    public readonly IBoardManager _boardModel;
 
     private Square _origin;
     private Square _destination;
 
     public dynamic Commands { get; } = new ExpandoObject();
-
 
     private bool _isPromotingPiece;
     public bool IsPromotingPiece {
@@ -45,7 +44,7 @@ public class PromotePieceViewModel : BindableBase, IPromotePieceViewModel {
         set => SetProperty(ref _queenImagePath, value);
     }
 
-    public PromotePieceViewModel(IBoardModel boardModel) {
+    public PromotePieceViewModel(IBoardManager boardModel) {
         _boardModel = boardModel;
         _boardModel.PromotePieceEventHandler += BeginPromotingPiece;
 

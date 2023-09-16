@@ -5,10 +5,10 @@ namespace ChessWpf;
 
 public class ExportManager : IExportManager {
 
-    private readonly IBoardModel _boardModelManager;
+    private readonly IBoardManager _boardManager;
 
-    public ExportManager(IBoardModel boardModel) { 
-        _boardModelManager = boardModel;
+    public ExportManager(IBoardManager boardModel) { 
+        _boardManager = boardModel;
     }
 
     public void Export() {
@@ -21,7 +21,7 @@ public class ExportManager : IExportManager {
         if (dialog.ShowDialog() != null) {
             using (var stream = dialog.OpenFile()) {
                 using (var writer = new StreamWriter(stream)) {
-                    writer.Write(_boardModelManager.CurrentGame.ExportPGN());
+                    writer.Write(_boardManager.CurrentGame.ExportPGN());
                 }
             }
         }
@@ -33,7 +33,7 @@ public class ExportManager : IExportManager {
         if (dialog.ShowDialog() != null) {
             using (var stream = dialog.OpenFile()) {
                 using (var writer = new StreamWriter(stream)) {
-                    writer.Write(_boardModelManager.CurrentGame.ExportFEN());
+                    writer.Write(_boardManager.CurrentGame.ExportFEN());
                 }
             }
         }

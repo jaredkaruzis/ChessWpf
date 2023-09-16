@@ -11,7 +11,7 @@ namespace ChessWpf;
 
 public class BoardViewModel : BindableBase, IBoardViewModel {
 
-    private readonly IBoardModel _boardModelManager;
+    private readonly IBoardManager _boardModelManager;
 
     private List<SquareButton> _squareButtons = new List<SquareButton>();
     public List<SquareButton> SquareButtons {
@@ -26,7 +26,7 @@ public class BoardViewModel : BindableBase, IBoardViewModel {
     private SquareButton _originSquare;
     private List<SquareButton> _highlightedSquares = new List<SquareButton>();
 
-    public BoardViewModel(IBoardModel boardModel) {
+    public BoardViewModel(IBoardManager boardModel) {
         _boardModelManager = boardModel;
         _boardModelManager.RefreshBoardEventHandler += OnRefreshBoard;
 

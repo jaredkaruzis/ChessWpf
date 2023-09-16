@@ -6,7 +6,7 @@ namespace ChessWpf;
 
 public class GameOverViewModel : BindableBase, IGameOverViewModel{
 
-    private readonly IBoardModel _boardModelManager;
+    private readonly IBoardManager _boardModelManager;
     private readonly INewGameManager _newGameManager;
 
     public dynamic Commands { get; } = new ExpandoObject();
@@ -29,7 +29,7 @@ public class GameOverViewModel : BindableBase, IGameOverViewModel{
         set => SetProperty(ref _winMessage, value); 
     }
 
-    public GameOverViewModel(IBoardModel boardModelManager, INewGameManager newGameManager) {
+    public GameOverViewModel(IBoardManager boardModelManager, INewGameManager newGameManager) {
         _boardModelManager = boardModelManager;
         _newGameManager = newGameManager;
 

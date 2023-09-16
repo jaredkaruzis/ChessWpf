@@ -16,7 +16,7 @@
             
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
-                    <Setter Property="BorderThickness" Value="1 1 0 0" />
+                    <Setter Property="BorderThickness" Value="1 1 1 0" />
                     <Setter Property="BorderBrush" Value="Black" />
                     <Setter Property="Focusable" Value="False"/>
                     <Setter Property="IsHitTestVisible" Value="False"/>
@@ -28,13 +28,16 @@
             
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="2"/>
+                    <StackPanel Orientation="Vertical"/>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
 
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Label Content="{Binding}" Padding="0" BorderThickness="0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="{Binding WhiteMove}" HorizontalContentAlignment="Left" Padding="0" BorderThickness="0" Width="83"/>
+                        <Button Content="{Binding BlackMove}" HorizontalContentAlignment="Left" Padding="0" BorderThickness="0" Width="83"/>
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
 
