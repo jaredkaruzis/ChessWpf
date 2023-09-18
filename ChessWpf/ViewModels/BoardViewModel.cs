@@ -31,8 +31,6 @@ public class BoardViewModel : BindableBase, IBoardViewModel {
         _boardModelManager.RefreshBoardEventHandler += OnRefreshBoard;
 
         Squares = CollectionViewSource.GetDefaultView(SquareButtons);
-        Commands.ResetGame = new DelegateCommand(ResetGame);
-
         LoadDummyBoard();
     }
 
@@ -61,7 +59,6 @@ public class BoardViewModel : BindableBase, IBoardViewModel {
             if (e.clicked.Piece.Color != _boardModelManager.CurrentTurn()) {    
                 return; // Clicked a enemy piece, cancel selection
             }
-
             // Select this piece and highlight its moves
             _originSquare = e.clicked;
             _originSquare.Selected = true;
@@ -138,10 +135,6 @@ public class BoardViewModel : BindableBase, IBoardViewModel {
     public void ClearHighlightedSquares() {
         _highlightedSquares.ForEach(x => x.Highlighted = false);
         _highlightedSquares.Clear();
-    }
-
-    public void ResetGame() {
-        _boardModelManager.StartNewGame(Color.White);
     }
 
     private void LoadDummyBoard() {

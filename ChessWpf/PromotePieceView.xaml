@@ -10,7 +10,6 @@
              Height="100">
 
     <UserControl.Resources>
-        <local:BoolToBorderBrushConverter x:Key="BoolToBrush"/>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
     </UserControl.Resources>
 

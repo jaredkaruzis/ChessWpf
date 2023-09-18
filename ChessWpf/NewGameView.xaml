@@ -22,8 +22,11 @@
             <Button BorderBrush="{Binding PlayerIsBlack, Converter={StaticResource BoolToBrush}}" Command="{Binding Commands.SelectBlack}" Background="Black" Width="50" Height="50"/>
         </StackPanel>
 
-        <Label HorizontalAlignment="Center">AI Level</Label>
-        <Slider Width="200" Minimum="1" Maximum="3" IsSnapToTickEnabled="True" TickPlacement="BottomRight" TickFrequency="1" Value="{Binding AiLevel}"/>
+        <CheckBox Content="Use AI" IsChecked="{Binding UseAI}" HorizontalAlignment="Center"/>
+        <Label HorizontalAlignment="Center" Visibility="{Binding UseAI, Converter={StaticResource BoolToVisibility}}">AI Level</Label>
+        <Slider Width="200" Value="{Binding AiLevel}"
+                Visibility="{Binding UseAI, Converter={StaticResource BoolToVisibility}}" 
+                Minimum="1" Maximum="3" IsSnapToTickEnabled="True" TickPlacement="BottomRight" TickFrequency="1"/>
 
         <Button Command="{Binding Commands.StartNewGame}" FontWeight="Bold" Width="200" Margin="25" Background="Green">Start Game</Button>
 

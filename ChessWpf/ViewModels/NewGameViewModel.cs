@@ -30,6 +30,12 @@ public class NewGameViewModel : BindableBase, INotifyPropertyChanged, INewGameVi
         set => SetProperty(ref _playerIsBlack, value); 
     }
 
+    private bool _useAI;
+    public bool UseAI {
+        get => _useAI;
+        set => SetProperty(ref _useAI, value);
+    }
+
     public Color PlayerColor { get; set; }
     public int AiLevel { get; set; }
     public dynamic Commands { get; } = new ExpandoObject();
@@ -54,7 +60,7 @@ public class NewGameViewModel : BindableBase, INotifyPropertyChanged, INewGameVi
     }
 
     public void StartNewGame() {
-        _boardModelManager.StartNewGame(PlayerColor, AiLevel);
+        _boardModelManager.StartNewGame(PlayerColor, UseAI ? AiLevel : 0);
         IsStartingNewGame = false;
     }
 

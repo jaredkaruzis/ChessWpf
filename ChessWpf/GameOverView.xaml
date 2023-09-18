@@ -8,9 +8,8 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d"
              Width="250" MaxHeight="150">
-    
+
     <UserControl.Resources>
-        <local:BoolToBorderBrushConverter x:Key="BoolToBrush"/>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
     </UserControl.Resources>
 

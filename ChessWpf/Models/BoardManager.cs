@@ -65,8 +65,10 @@ public class BoardManager : IBoardManager {
             NotifyGameOver();
         }
         else if (CurrentGame.CurrentTurn == OpponentColor) {
-            var aiTask = new Task(MoveAI);
-            aiTask.Start();
+            if (OpponenetLevel > 0) {
+                var aiTask = new Task(MoveAI);
+                aiTask.Start();
+            }
         }
     }
 
@@ -101,7 +103,7 @@ public class BoardManager : IBoardManager {
     }
 
     private void MoveAI() {
-        var move = AI.MinmaxMove(CurrentGame);
+        var move = AI.MinmaxMove(CurrentGame, OpponenetLevel);
         SubmitMove(move[0], move[1]);
     }
 
