@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="ChessWpf.NewGameView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChessWpf"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d"
+             Width="250" MaxHeight="250">
+
+    <UserControl.Resources>
+        <local:BoolToBorderBrushConverter x:Key="BoolToBrush"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+    </UserControl.Resources>
+
+    <StackPanel Visibility="{Binding IsStartingNewGame, Converter={StaticResource BoolToVisibility}}" HorizontalAlignment="Center" Background="LightGray">
+
+        <Label HorizontalAlignment="Center">Select Color</Label>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button BorderBrush="{Binding PlayerIsWhite, Converter={StaticResource BoolToBrush}}" Command="{Binding Commands.SelectWhite}" Background="White" Width="50" Height="50"/>
+            <Button BorderBrush="{Binding PlayerIsBlack, Converter={StaticResource BoolToBrush}}" Command="{Binding Commands.SelectBlack}" Background="Black" Width="50" Height="50"/>
+        </StackPanel>
+
+        <CheckBox Content="Use AI" IsChecked="{Binding UseAI}" HorizontalAlignment="Center"/>
+        <Label HorizontalAlignment="Center" Visibility="{Binding UseAI, Converter={StaticResource BoolToVisibility}}">AI Level</Label>
+        <Slider Width="200" Value="{Binding AiLevel}"
+                Visibility="{Binding UseAI, Converter={StaticResource BoolToVisibility}}" 
+                Minimum="1" Maximum="3" IsSnapToTickEnabled="True" TickPlacement="BottomRight" TickFrequency="1"/>
+
+        <Button Command="{Binding Commands.StartNewGame}" FontWeight="Bold" Width="200" Margin="25" Background="Green">Start Game</Button>
+
+    </StackPanel>
+
+</UserControl>

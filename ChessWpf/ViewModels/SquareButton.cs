@@ -87,25 +87,25 @@ public class SquareButton : BindableBase {
         if (Piece != null) {
             return Piece.Color == ChessEngine.Color.White ? whitePieceImages[Piece.Type] : blackPieceImages[Piece.Type];
         } else {
-            return "Images/empty.png";
+            return "../Images/empty.png";
         }
     }
 
     public static Dictionary<PieceType, string> whitePieceImages = new Dictionary<PieceType, string>() {
-            {PieceType.Bishop, "Images/whitebishop.png" },
-            {PieceType.King, "Images/whiteking.png" },
-            {PieceType.Knight, "Images/whiteknight.png" },
-            {PieceType.Pawn, "Images/whitepawn.png" },
-            {PieceType.Queen, "Images/whitequeen.png" },
-            {PieceType.Rook, "Images/whiterook.png" },
+            {PieceType.Bishop, "../Images/whitebishop.png" },
+            {PieceType.King, "../Images/whiteking.png" },
+            {PieceType.Knight, "../Images/whiteknight.png" },
+            {PieceType.Pawn, "../Images/whitepawn.png" },
+            {PieceType.Queen, "../Images/whitequeen.png" },
+            {PieceType.Rook, "../Images/whiterook.png" },
     };
 
     public static Dictionary<PieceType, string> blackPieceImages = new Dictionary<PieceType, string>() {
-            {PieceType.Bishop, "Images/blackbishop.png" },
-            {PieceType.King, "Images/blackking.png" },
-            {PieceType.Knight, "Images/blackknight.png" },
-            {PieceType.Pawn, "Images/blackpawn.png" },
-            {PieceType.Queen, "Images/blackqueen.png" },
-            {PieceType.Rook, "Images/blackrook.png" },
+            {PieceType.Bishop, "../Images/blackbishop.png" },
+            {PieceType.King, "../Images/blackking.png" },
+            {PieceType.Knight, "../Images/blackknight.png" },
+            {PieceType.Pawn, "../Images/blackpawn.png" },
+            {PieceType.Queen, "../Images/blackqueen.png" },
+            {PieceType.Rook, "../Images/blackrook.png" },
     };
 }
