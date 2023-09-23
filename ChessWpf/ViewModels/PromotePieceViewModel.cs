@@ -61,10 +61,10 @@ public class PromotePieceViewModel : BindableBase, IPromotePieceViewModel {
         _destination = e.DestinationSquare;
 
         var colorString = e.OriginSquare.Piece.IsWhite ? "white" : "black";
-        KnightImagePath = $"Images/{colorString}knight.png";
-        BishopImagePath = $"Images/{colorString}bishop.png";
-        RookImagePath = $"Images/{colorString}rook.png";
-        QueenImagePath = $"Images/{colorString}queen.png";
+        KnightImagePath = $"../Images/{colorString}knight.png";
+        BishopImagePath = $"../Images/{colorString}bishop.png";
+        RookImagePath = $"../Images/{colorString}rook.png";
+        QueenImagePath = $"../Images/{colorString}queen.png";
     }
 
     public void SelectKnight() {

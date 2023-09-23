@@ -1,4 +1,4 @@
-﻿using ChessEngine;
+using ChessEngine;
 using System;
 using System.Windows;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ public class BoardManager : IBoardManager {
 
     public Board CurrentGame { get; set; }
 
-    public int OpponenetLevel { get; set; }     // level 1 = easy, level 2 = medium, level 3 = hard
+    public int OpponentLevel { get; set; }     // level 1 = easy, level 2 = medium, level 3 = hard
 
     public Color OpponentColor { get; set; }
 
@@ -24,15 +24,22 @@ public class BoardManager : IBoardManager {
 
     public void StartNewGame(Color PlayerColor = Color.White) {
         OpponentColor = PlayerColor == Color.Black ? Color.White : Color.Black;
-        OpponenetLevel = 2;
+        OpponentLevel = 2;
         CurrentGame = new Board();
         Refresh();
     }
 
     public void StartNewGame(Color PlayerColor, int AiLevel) {
         OpponentColor = PlayerColor == Color.Black ? Color.White : Color.Black;
-        OpponenetLevel = AiLevel;
+        OpponentLevel = AiLevel;
         CurrentGame = new Board();
+        Refresh();
+    }
+
+    public void LoadGame(Board newBoard) {
+        OpponentColor = Color.NoColor;
+        OpponentLevel = 0;
+        CurrentGame = newBoard;
         Refresh();
     }
 
@@ -65,7 +72,7 @@ public class BoardManager : IBoardManager {
             NotifyGameOver();
         }
         else if (CurrentGame.CurrentTurn == OpponentColor) {
-            if (OpponenetLevel > 0) {
+            if (OpponentLevel > 0) {
                 var aiTask = new Task(MoveAI);
                 aiTask.Start();
             }
@@ -103,7 +110,7 @@ public class BoardManager : IBoardManager {
     }
 
     private void MoveAI() {
-        var move = AI.MinmaxMove(CurrentGame, OpponenetLevel);
+        var move = AI.MinmaxMove(CurrentGame, OpponentLevel);
         SubmitMove(move[0], move[1]);
     }
 
@@ -111,12 +118,12 @@ public class BoardManager : IBoardManager {
         var squares = new List<SquareModel>();
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                if (OpponentColor == Color.Black) {
-                    var square = new SquareModel(CurrentGame.Squares[j, i]);
+                if (OpponentColor == Color.White) {
+                    var square = new SquareModel(CurrentGame.Squares[7 - j, 7 - i]);
                     squares.Add(square);
                 }
-                else if (OpponentColor == Color.White) {
-                    var square = new SquareModel(CurrentGame.Squares[7 - j, 7 - i]);
+                else {
+                    var square = new SquareModel(CurrentGame.Squares[j, i]);
                     squares.Add(square);
                 }
             }

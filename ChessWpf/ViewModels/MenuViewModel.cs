@@ -12,7 +12,6 @@ public class MenuViewModel : BindableBase, IMenuViewModel {
 
     public dynamic Commands { get; } = new ExpandoObject();
 
-
     public MenuViewModel(
             INewGameManager newGameManager, 
             IExportManager exportManager,
@@ -36,6 +35,6 @@ public class MenuViewModel : BindableBase, IMenuViewModel {
     }
 
     public void StartImportGame() {
-        var board = _importManager.ImportPGN();
+        _importManager.ImportPGN();
     }
 }

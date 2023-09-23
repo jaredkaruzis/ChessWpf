@@ -8,18 +8,23 @@
              mc:Ignorable="d"
              MaxHeight="525">
 
-    <StackPanel Margin="5 -10 7 0" Width="175" MaxHeight="540">
+    <StackPanel Margin="5 -10 7 0" Width="185"  MaxHeight="540">
 
-        <Label HorizontalAlignment="Center">Move List</Label>
+        <Label HorizontalAlignment="Center" FontWeight="Bold">Move List</Label>
 
-        <DataGrid ItemsSource="{Binding MoveList}" BorderThickness="1" HeadersVisibility="None" CanUserResizeColumns="False" AutoGenerateColumns="False" IsReadOnly="True" IsHitTestVisible="False">
+        <ScrollViewer Height="500" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible" CanContentScroll="True">
+            
+            <DataGrid ItemsSource="{Binding MoveList}" BorderThickness="1" HeadersVisibility="None" CanUserResizeColumns="False" AutoGenerateColumns="False" IsReadOnly="True">
 
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Index}" Width="25" />
-                <DataGridTextColumn Binding="{Binding WhiteMove}" Width="74"/>
-                <DataGridTextColumn Binding="{Binding BlackMove}" Width="74"/>
-            </DataGrid.Columns>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Index}" Width="25" FontWeight="Bold" />
+                    <DataGridTextColumn Binding="{Binding WhiteMove}" Width="66"/>
+                    <DataGridTextColumn Binding="{Binding BlackMove}" Width="74"/>
+                </DataGrid.Columns>
 
-        </DataGrid>
+            </DataGrid>
+
+        </ScrollViewer>
+        
     </StackPanel>
 </UserControl>

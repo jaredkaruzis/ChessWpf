@@ -2,6 +2,6 @@
 
 namespace ChessWpf; 
 public interface IImportManager {
-    public Board ImportPGN();
-    public Board ImportFEN();
+    public void ImportPGN();
+    public void ImportFEN();
 }
